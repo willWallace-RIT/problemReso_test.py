@@ -1,4 +1,6 @@
 Problem Resolution Validation Harness
+
+
 A modular, schema-driven testing and validation framework designed to evaluate how automated algorithms detect, isolate, and handle complex systemic anomalies, chronic performance drift, and deniable interference patterns.
 Architecture Overview
 Standard testing harnesses often focus on single-point stress testing or surface-level error rates. This harness evaluates root-cause resolution and systemic rationality by decoupling test scenarios from execution logic:
