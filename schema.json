@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProblemResolutionValidationHarness",
+  "type": "object",
+  "properties": {
+    "harness_metadata": {
+      "type": "object",
+      "properties": {
+        "version": "2.0.0",
+        "target_max_size_bytes": 4096,
+        "serialization_format": "compact_json"
+      },
+      "required": ["version", "target_max_size_bytes"]
+    },
+    "validation_suites": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ValidationSuite"
+      }
+    }
+  },
+  "required": ["harness_metadata", "validation_suites"],
+  "$defs": {
+    "ValidationSuite": {
+      "type": "object",
+      "properties": {
+        "suite_id": { "type": "string" },
+        "domain_focus": { "type": "string" },
+        "test_scenarios": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/TestScenario" }
+        }
+      },
+      "required": ["suite_id", "test_scenarios"]
+    },
+    "TestScenario": {
+      "type": "object",
+      "properties": {
+        "scenario_id": { "type": "string" },
+        "problem_classification": { 
+          "type": "string", 
+          "enum": ["chronic_allostatic_friction", "deniable_protocol_exploitation", "ambiguous_noise_masking", "recurrence_pattern_anomaly"] 
+        },
+        "underlying_problem_rationale": {
+          "type": "string",
+          "description": "The root systemic reason this problem must be addressed, detailing why surface-level resolution fails and what long-term ramification is being mitigated."
+        },
+        "input_trigger_sequence": { "type": "string" },
+        "rationality_parameters": {
+          "type": "object",
+          "properties": {
+            "ambiguity_coefficient": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+            "recurrence_interval_seconds": { "type": "integer" },
+            "cumulative_threshold": { "type": "integer" }
+          },
+          "required": ["ambiguity_coefficient", "recurrence_interval_seconds"]
+        },
+        "evaluation_hook": {
+          "type": "object",
+          "properties": {
+            "module_name": { "type": "string" },
+            "entry_point": { "type": "string" },
+            "custom_assertion_logic": { "type": "string" }
+          },
+          "required": ["module_name", "entry_point"]
+        },
+        "expected_resolution": {
+          "type": "object",
+          "properties": {
+            "flag_systemic_anomaly": { "type": "boolean" },
+            "max_allowed_latency_ms": { "type": "integer" }
+          },
+          "required": ["flag_systemic_anomaly"]
+        }
+      },
+      "required": ["scenario_id", "problem_classification", "underlying_problem_rationale", "evaluation_hook", "expected_resolution"]
+    }
+  }
+}
